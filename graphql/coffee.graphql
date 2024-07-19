@@ -1,0 +1,71 @@
+mutation CreateCoffee($data: CreateCoffeeInput!) {
+  createCoffee(data: $data) {
+    ...Coffee
+  }
+}
+
+query GetCoffee($slug: String!) {
+  getCoffee(slug: $slug) {
+    ...Coffee
+  }
+}
+
+query GetFilterableAttributes(
+  $key: String!
+  $temperature: Temperature
+  $density: String
+  $flavors: [String!]
+  $others: [String!]
+  $pairingSuggestions: [String!]
+) {
+  getFilterableAttributes(
+    key: $key
+    temperature: $temperature
+    density: $density
+    flavors: $flavors
+    others: $others
+    pairing_suggestions: $pairingSuggestions
+  )
+}
+
+query GetFilteredCoffees(
+  $density: String!
+  $flavors: [String!]!
+  $pairingSuggestions: [String!]!
+  $temperature: Temperature!
+  $others: [String!]
+) {
+  getFilteredCoffees(
+    density: $density
+    flavors: $flavors
+    pairing_suggestions: $pairingSuggestions
+    temperature: $temperature
+    others: $others
+  ) {
+    ...Coffee
+  }
+}
+
+fragment Coffee on CoffeePayload {
+  id
+  name
+  caffeine_content
+  density
+  description
+  flavors
+  history
+  origin
+  others
+  pairing_suggestions
+  serving_temperature
+  temperature
+  jobs {
+    ...Jobs
+  }
+}
+
+fragment Jobs on JobPayload {
+  id
+  name
+  description
+}

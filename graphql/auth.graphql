@@ -1,0 +1,33 @@
+mutation Register($data: RegisterDto!) {
+  register(data: $data) {
+    ...Auth
+  }
+}
+
+mutation Login($data: LoginDto!) {
+  login(data: $data) {
+    ...Auth
+  }
+}
+
+mutation ResendEmailVerification($email: String!) {
+  resendEmailVerification(email: $email)
+}
+
+mutation VerifyEmail($token: String!) {
+  verifyEmail(token: $token)
+}
+
+fragment Auth on AuthPayload {
+  accessToken
+  refreshToken
+  user {
+    ...User
+  }
+}
+
+fragment User on UserPayload {
+  id
+  name
+  email
+}

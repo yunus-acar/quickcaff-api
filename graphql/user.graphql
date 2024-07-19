@@ -1,0 +1,43 @@
+mutation UpdateUser($data: UpdateUserDto!) {
+  updateUser(data: $data) {
+    ...User
+  }
+}
+
+mutation DeleteUser {
+  deleteUser
+}
+
+query GetUser($getUserId: Int!) {
+  getUser(id: $getUserId) {
+    ...User
+  }
+}
+
+query GetUsers($limit: Int!, $offset: Int!) {
+  getUsers(limit: $limit, offset: $offset) {
+    ...Users
+  }
+}
+
+fragment Users on UsersPayload {
+  count
+  users {
+    ...User
+  }
+}
+
+fragment User on UserPayload {
+  id
+  name
+  email
+  job {
+    ...Job
+  }
+}
+
+fragment Job on JobPayload {
+  id
+  description
+  name
+}

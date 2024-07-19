@@ -1,0 +1,28 @@
+query GetJobs {
+  getJobs {
+    ...Job
+  }
+}
+
+query GetJobById($getJobByIdId: Int!) {
+  getJobById(id: $getJobByIdId) {
+    ...Job
+  }
+}
+
+fragment Job on JobPayload {
+  id
+  name
+  description
+  coffees {
+    ...Coffees
+  }
+}
+
+fragment Coffees on CoffeePayload {
+  id
+  name
+  slug
+  description
+  temperature
+}

@@ -1,0 +1,170 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayload {
+  """JWT access token"""
+  accessToken: JWT!
+
+  """JWT refresh token"""
+  refreshToken: JWT!
+  user: UserPayload!
+}
+
+type CoffeePayload {
+  caffeine_content: String!
+  coffee: CoffeePayload!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  density: String!
+  description: String!
+  flavors: [String!]!
+  history: String!
+  id: Int!
+  image: String!
+  jobs: [JobPayload!]!
+  name: String!
+  origin: String!
+  others: [String!]!
+  pairing_suggestions: [String!]!
+  serving_temperature: Temperature!
+  slug: String!
+  temperature: Temperature!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+  variations: [String!]!
+}
+
+input CreateCoffeeInput {
+  caffeine_content: String
+  density: String!
+  description: String!
+  flavors: [String!]!
+  history: String
+  image: Upload!
+  imagePath: String
+  jobIds: [Int!]
+  name: String!
+  origin: String
+  others: [String!]!
+  pairing_suggestions: [String!]!
+  serving_temperature: Temperature!
+  temperature: Temperature!
+}
+
+input CreateUserDto {
+  email: String!
+  name: String
+  password: String!
+  role: Role = User
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
+A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
+"""
+scalar JWT
+
+type JobPayload {
+  coffees: [CoffeePayload!]!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  description: String
+  id: Int!
+  job: JobPayload!
+  name: String!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createCoffee(data: CreateCoffeeInput!): CoffeePayload!
+  createUser(data: CreateUserDto!): UserPayload!
+  deleteUser: Boolean!
+  forgotPassword(email: String!): Boolean!
+  login(data: LoginDto!): AuthPayload!
+  refreshToken(refreshToken: String!): TokenPayload!
+  register(data: RegisterDto!): AuthPayload!
+  resendEmailVerification(email: String!): Boolean!
+  resetPassword(password: String!, token: String!): Boolean!
+  updateUser(data: UpdateUserDto!): UserPayload!
+  verifyEmail(token: String!): Boolean!
+}
+
+type Query {
+  getCoffee(slug: String!): CoffeePayload!
+  getCoffees: [CoffeePayload!]!
+  getFilterableAttributes(density: String, flavors: [String!], key: String!, others: [String!], pairing_suggestions: [String!], temperature: Temperature): [String!]!
+  getFilteredCoffees(density: String!, flavors: [String!]!, others: [String!], pairing_suggestions: [String!]!, temperature: Temperature!): [CoffeePayload!]!
+  getJobById(id: Int!): JobPayload!
+  getJobs: [JobPayload!]!
+  getUser(id: Int!): UserPayload!
+  getUsers(limit: Int!, offset: Int!): UsersPayload!
+}
+
+input RegisterDto {
+  email: String!
+  name: String!
+  password: String!
+}
+
+"""User's role"""
+enum Role {
+  Admin
+  SuperAdmin
+  User
+}
+
+"""The temperature of the coffee"""
+enum Temperature {
+  HOT
+  ICED
+}
+
+type TokenPayload {
+  """JWT access token"""
+  accessToken: JWT!
+
+  """JWT refresh token"""
+  refreshToken: JWT!
+}
+
+input UpdateUserDto {
+  name: String
+  password: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UserPayload {
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  email: String!
+  id: Int!
+  job: JobPayload
+  jobId: Int
+  name: String!
+  role: Role!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+}
+
+type UsersPayload {
+  count: Int!
+  users: [UserPayload!]!
+}
