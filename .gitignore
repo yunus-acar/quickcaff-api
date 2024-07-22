@@ -36,3 +36,5 @@ lerna-debug.log*
 .env
 docker.env
 ormconfig.json
+.env.production
+.env.local
