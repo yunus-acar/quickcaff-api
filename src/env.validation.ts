@@ -99,11 +99,7 @@ class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
-  REDIS_HOST: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  REDIS_PORT: number;
+  REDIS_URL: string;
 
   @IsString()
   @IsNotEmpty()

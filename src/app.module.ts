@@ -46,9 +46,8 @@ import awsConfig from './shared/config/aws.config';
       useClass: GqlConfigService,
     }),
     CacheModule.register({
-      host: `${process.env.REDIS_HOST}`,
       store: redisStore,
-      port: `${process.env.REDIS_PORT}`,
+      url: process.env.REDIS_URL,
       isGlobal: true,
     }),
     LoggerModule,
