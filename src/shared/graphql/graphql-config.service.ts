@@ -18,6 +18,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       // subscription
       installSubscriptionHandlers: true,
       includeStacktraceInErrorResponses: true,
+      introspection: true,
 
       // playground
       playground: false,

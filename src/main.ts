@@ -30,12 +30,11 @@ const bootstrap = async () => {
   });
   const configService = server.get(ConfigService);
 
-/*
   server.enableCors({
     origin: configService.get('app.frontendURL'),
     credentials: true,
   });
-*/
+
   await server.listen(configService.get('app.port'));
 };
 
