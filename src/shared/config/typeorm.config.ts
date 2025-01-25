@@ -20,10 +20,7 @@ class TypeOrmConfig {
       synchronize: configService.get('typeorm.synchronize'),
       entities: ['dist/**/*.entity{.ts,.js}'],
       migrations: ['dist/migrations/**/*{.js,.ts}'],
-      ssl:
-        (configService.get('app.env') === 'production' ||  configService.get('app.env') === 'staging')
-          ? { rejectUnauthorized: false }
-          : false,
+      ssl: false,
     };
 
     const isLogging = configService.get('typeorm.logging') || false;
